@@ -2,13 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF=8">
-    <title>{% block title %}
+<title>
+    {% block title %}
         Base Title
-        {% endblock title %}</title>
+    {% endblock title %}</title>
 </head>
 <body>
-    {% block body %}
-    Base body
-    {% endblock body %}
+{% include "components/navbar.html" %}
+
+{% block body %}
+Base body
+{% endblock body %}
+
+
+<footer>
+    &copy; Django ToDo App
+</footer>
+
 </body>
 </html>
