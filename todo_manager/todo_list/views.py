@@ -40,4 +40,5 @@ class ToDoDetailView(DetailView):
 class ToDoItemCreateView(CreateView):
     model = ToDoItem
     form_class = ToDoItemForm
+    #fields = ("title", "description")
 
