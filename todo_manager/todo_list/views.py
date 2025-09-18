@@ -3,10 +3,12 @@ from django.http import (
     HttpResponse,
 )
 from django.shortcuts import render
+from django.urls import reverse
 
 from .models import ToDoItem
+from .forms import ToDoItemForm
 
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView
 
 
 def index_view(request: HttpRequest) -> HttpResponse:
@@ -33,3 +35,14 @@ class ToDoListDoneView(ListView):
 
 class ToDoDetailView(DetailView):
     model = ToDoItem
+
+
+class ToDoItemCreateView(CreateView):
+    model = ToDoItem
+    form_class = ToDoItemForm
+
+    def get_success_url(self):
+        return reverse(
+            "todo_list:detail",
+            kwargs={"pk": self.object.pk},
+        )
