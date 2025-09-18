@@ -41,8 +41,3 @@ class ToDoItemCreateView(CreateView):
     model = ToDoItem
     form_class = ToDoItemForm
 
-    def get_success_url(self):
-        return reverse(
-            "todo_list:detail",
-            kwargs={"pk": self.object.pk},
-        )

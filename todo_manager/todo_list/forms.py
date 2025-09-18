@@ -8,4 +8,6 @@ class ToDoItemForm(forms.ModelForm):
         model = ToDoItem
         fields = ("title",)
 
-    title = forms.CharField(max_length=250)
+        widgets = {
+            "title": forms.Textarea(attrs={"cols": 30, "rows": 5})
+            }
