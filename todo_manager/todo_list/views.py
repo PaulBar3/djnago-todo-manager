@@ -1,6 +1,7 @@
 from django.http import (
     HttpRequest,
     HttpResponse,
+    HttpResponseRedirect,
 )
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -17,7 +18,7 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView
+    DeleteView,
 )
 
 
@@ -36,7 +37,8 @@ class ToDoListIndexView(ListView):
 
 
 class ToDoListView(ListView):
-    model = ToDoItem
+    # model = ToDoItem
+    queryset = ToDoItem.objects.filter(archived=False)
 
 
 class ToDoListDoneView(ListView):
@@ -44,7 +46,8 @@ class ToDoListDoneView(ListView):
 
 
 class ToDoDetailView(DetailView):
-    model = ToDoItem
+    # model = ToDoItem
+    queryset = ToDoItem.objects.filter(archived=False)
 
 
 class ToDoItemCreateView(CreateView):
@@ -62,4 +65,9 @@ class ToDoItemUpdateView(UpdateView):
 class ToDoItemDeleteView(DeleteView):
     model = ToDoItem
     success_url = reverse_lazy("todo_list:list")
-    "_confirm_delete"
+
+    def form_valid(self, form):
+        success_url = self.get_success_url()
+        self.object.archived = True
+        self.object.save()
+        return HttpResponseRedirect(success_url)
