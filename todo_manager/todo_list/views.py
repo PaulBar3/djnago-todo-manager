@@ -3,7 +3,7 @@ from django.http import (
     HttpResponse,
 )
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from .models import ToDoItem
 from .forms import (
@@ -17,6 +17,7 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
+    DeleteView
 )
 
 
@@ -54,5 +55,11 @@ class ToDoItemCreateView(CreateView):
 
 class ToDoItemUpdateView(UpdateView):
     model = ToDoItem
+    template_name_suffix = "_update_form"
     form_class = ToDoItemUpdateForm
-    
+
+
+class ToDoItemDeleteView(DeleteView):
+    model = ToDoItem
+    success_url = reverse_lazy("todo_list:list")
+    "_confirm_delete"
