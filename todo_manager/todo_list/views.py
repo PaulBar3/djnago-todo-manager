@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import ToDoItem
-from .forms import ToDoItemForm
+from .forms import ToDoItemCreateForm
 
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 
@@ -39,6 +39,6 @@ class ToDoDetailView(DetailView):
 
 class ToDoItemCreateView(CreateView):
     model = ToDoItem
-    form_class = ToDoItemForm
+    form_class = ToDoItemCreateForm
     #fields = ("title", "description")
 

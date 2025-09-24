@@ -3,7 +3,7 @@ from django import forms
 from todo_list.models import ToDoItem
 
 
-class ToDoItemForm(forms.ModelForm):
+class ToDoItemCreateForm(forms.ModelForm):
     class Meta:
         model = ToDoItem
         fields = ("title","description")
@@ -11,3 +11,4 @@ class ToDoItemForm(forms.ModelForm):
         widgets = {
             "description": forms.Textarea(attrs={"cols": 30, "rows": 5})
             }
+
