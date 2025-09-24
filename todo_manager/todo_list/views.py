@@ -6,9 +6,18 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import ToDoItem
-from .forms import ToDoItemCreateForm
+from .forms import (
+    ToDoItemCreateForm,
+    ToDoItemUpdateForm,
+)
 
-from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from django.views.generic import (
+    TemplateView,
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+)
 
 
 def index_view(request: HttpRequest) -> HttpResponse:
@@ -40,5 +49,10 @@ class ToDoDetailView(DetailView):
 class ToDoItemCreateView(CreateView):
     model = ToDoItem
     form_class = ToDoItemCreateForm
-    #fields = ("title", "description")
+    # fields = ("title", "description")
 
+
+class ToDoItemUpdateView(UpdateView):
+    model = ToDoItem
+    form_class = ToDoItemUpdateForm
+    
