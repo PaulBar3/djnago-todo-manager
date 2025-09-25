@@ -1,0 +1,4 @@
+HEllo {{ name }} !
+
+We`re so glad too see you!
+Thank`s good bye!
